@@ -15,147 +15,514 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #3e66b7;
-        padding: 24px;
-      }
+      * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-      h2 {
-        margin: 0 0 8px;
-      }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #dff3ff, #eef7ff);
+    min-height: 100vh;
+    padding: 30px;
+    color: #1e293b;
+}
 
-      .card {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        max-width: 900px;
-        margin: 0 auto 16px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-      .row {
-        display: flex;
-        gap: 12px;
-        align-items: center;
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header {
+    background: linear-gradient(135deg, #0f4c81, #1976b8);
+    color: white;
+    padding: 32px;
+    border-radius: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 10px 30px rgba(15, 76, 129, 0.20);
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+.search-box {
+    background: white;
+    padding: 22px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.search-box label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #475569;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input,
+.search-box select {
+    padding: 13px 15px;
+    border: 1px solid #dbe4ee;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    background: #f8fafc;
+}
+
+.search-box input {
+    flex: 1;
+}
+
+.search-box select {
+    min-width: 150px;
+}
+
+.search-box input:focus,
+.search-box select:focus {
+    border-color: #1976b8;
+    background: white;
+}
+
+.search-box button {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 12px;
+    background: #1976b8;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-box button:hover {
+    background: #0f4c81;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   LOCALIZAÇÃO
+========================= */
+
+.card h2 {
+    color: #0f4c81;
+    margin-bottom: 10px;
+}
+
+.card strong {
+    color: #1976b8;
+}
+
+
+/* =========================
+   CARDS DO CLIMA
+========================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.cards .card {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+    transition: 0.2s;
+}
+
+.cards .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.cards .card h3 {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.cards .card p {
+    font-size: 27px;
+    font-weight: bold;
+    color: #0f4c81;
+}
+
+
+/* =========================
+   CARDS NORMAIS
+========================= */
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =========================
+   GRÁFICO
+========================= */
+
+.chart-box {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+}
+
+.chart-box h2 {
+    color: #0f4c81;
+    font-size: 20px;
+}
+
+
+/* =========================
+   MQTT
+========================= */
+
+.mqtt-box {
+    background: white;
+    padding: 22px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+}
+
+.mqtt-box h2 {
+    color: #0f4c81;
+}
+
+
+/* =========================
+   MENSAGENS
+========================= */
+
+#mensagem {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer {
+    text-align: center;
+    padding: 15px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .row {
         flex-wrap: wrap;
-      }
+    }
 
-      .row input,
-      .row select,
-      .row button {
-        padding: 10px 12px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-      }
+    .search-box input {
+        width: 100%;
+    }
 
-      .row button {
-        cursor: pointer;
-        background: #3e66b7;
-        color: white;
-        font-weight: bold;
-        border: none;
-      }
+    .search-box select {
+        flex: 1;
+    }
 
-      .row button:hover {
-        background: #294b8f;
-      }
+    .search-box button {
+        flex: 1;
+    }
+}
 
-      .vals {
-        display: flex;
-        gap: 24px;
-        font-size: 1.2rem;
-        margin: 16px 0 0;
-        flex-wrap: wrap;
-      }
 
-      #chart {
-        max-width: 900px;
-        margin: 16px auto;
-      }
+@media (max-width: 600px) {
 
-      .pill {
-        display: inline-block;
-        padding: 4px 10px;
-        background: #eef2ff;
-        border-radius: 999px;
-        font-size: 0.9rem;
-      }
+    body {
+        padding: 15px;
+    }
 
-      #mensagem {
-        margin-top: 12px;
-        font-size: 0.95rem;
-        font-weight: 500;
-      }
+    header {
+        padding: 25px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .search-box input,
+    .search-box select,
+    .search-box button {
+        width: 100%;
+    }
+}
     </style>
   </head>
 
   <body>
+  <div class="container">
 
-    <!-- ==========================================
-         CARD PRINCIPAL
-    =========================================== -->
+    <!-- CABEÇALHO -->
+    <header>
 
-    <div class="card">
+        <h1>🌤️ Dashboard Meteorológico</h1>
 
-      <h2>☁️ ESP32 + OpenWeatherMap</h2>
+        <p>
+            Consulte o clima em tempo real usando a OpenWeatherMap.
+        </p>
 
-      <div class="row">
+    </header>
 
-        <span class="pill">
-          Cidade atual:
-          <b id="cidadeAtual">—</b>
-        </span>
 
-        <input
-          id="cidade"
-          type="text"
-          placeholder="Ex.: Sao Paulo"
-        />
+    <!-- PESQUISA -->
+    <section class="search-box">
 
-        <select id="pais">
-          <option value="BR">BR</option>
-          <option value="US">US</option>
-          <option value="PT">PT</option>
-          <option value="AR">AR</option>
-          <option value="CL">CL</option>
-        </select>
+        <label for="cidade">
+            Pesquisar cidade
+        </label>
 
-        <button id="aplicar">
-          Aplicar cidade
-        </button>
+        <div class="row">
 
-      </div>
+            <input
+                id="cidade"
+                type="text"
+                placeholder="Ex.: Brotas"
+            />
 
-      <div id="mensagem"></div>
+            <select id="pais">
 
-      <div class="vals">
+                <option value="BR">Brasil</option>
+                <option value="US">Estados Unidos</option>
+                <option value="PT">Portugal</option>
+                <option value="AR">Argentina</option>
+                <option value="CL">Chile</option>
 
-        <div>
-          🌡️ Temperatura:
-          <b id="temp">-- °C</b>
+            </select>
+
+            <button id="aplicar">
+                🔍 Consultar clima
+            </button>
+
         </div>
 
-        <div>
-          💧 Umidade:
-          <b id="hum">-- %</b>
+        <div id="mensagem"></div>
+
+    </section>
+
+
+    <!-- LOCALIZAÇÃO -->
+    <section class="card">
+
+        <h2>📍 Localização</h2>
+
+        <p>
+            Cidade atual:
+            <strong id="cidadeAtual">—</strong>
+        </p>
+
+    </section>
+
+
+    <!-- CARDS METEOROLÓGICOS -->
+    <section class="cards">
+
+        <div class="card">
+
+            <h3>🌡️ TEMPERATURA</h3>
+
+            <p id="temp">
+                -- °C
+            </p>
+
         </div>
 
-      </div>
 
-    </div>
+        <div class="card">
+
+            <h3>💧 UMIDADE</h3>
+
+            <p id="hum">
+                -- %
+            </p>
+
+        </div>
 
 
-    <!-- ==========================================
-         GRÁFICO
-    =========================================== -->
+        <div class="card">
 
-    <div class="card">
+            <h3>🌡️ SENSAÇÃO TÉRMICA</h3>
 
-      <canvas id="chart"></canvas>
+            <p id="sensacao">
+                -- °C
+            </p>
 
-    </div>
+        </div>
 
+
+        <div class="card">
+
+            <h3>💨 VENTO</h3>
+
+            <p id="vento">
+                -- km/h
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>⏱️ PRESSÃO</h3>
+
+            <p id="pressao">
+                -- hPa
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🔥 TEMPERATURA MÁXIMA</h3>
+
+            <p id="tempMax">
+                -- °C
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>❄️ TEMPERATURA MÍNIMA</h3>
+
+            <p id="tempMin">
+                -- °C
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>☁️ CONDIÇÃO</h3>
+
+            <p id="condicao">
+                --
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- GRÁFICO -->
+    <section class="chart-box">
+
+        <h2>📊 Histórico Meteorológico</h2>
+
+        <br>
+
+        <canvas id="chart"></canvas>
+
+    </section>
+
+
+    <!-- MQTT -->
+    <section class="mqtt-box">
+
+        <h2>📡 Status MQTT</h2>
+
+        <br>
+
+        <p id="mqttStatus">
+            🟡 Conectando ao servidor MQTT...
+        </p>
+
+    </section>
+
+
+    <!-- ÚLTIMA ATUALIZAÇÃO -->
+    <section class="card">
+
+        <h2>🕐 Última atualização</h2>
+
+        <br>
+
+        <p id="ultimaAtualizacao">
+            Ainda não realizada.
+        </p>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            Dashboard Meteorológico • ESP32 + OpenWeatherMap + MQTT
+        </p>
+
+    </footer>
+
+</div>
 
     <script>
 
@@ -165,7 +532,7 @@
 
       // COLE SUA CHAVE REAL AQUI
       const OPENWEATHER_API_KEY =
-        "COLE_SUA_CHAVE_AQUI";
+        "4d3de16a50689932f54f5be486d72737";
 
 
       // =====================================================
@@ -271,85 +638,130 @@
 
       const chart = new Chart(ctx, {
 
-        type: "line",
+    type: "line",
 
-        data: {
+    data: {
 
-          labels: [],
+        labels: [],
 
-          datasets: [
+        datasets: [
 
             {
-              label: "Temperatura (°C)",
+                label: "Temperatura (°C)",
 
-              data: [],
+                data: [],
 
-              borderColor: "red",
+                borderColor: "red",
 
-              backgroundColor:
-                "rgba(255,0,0,0.15)",
+                backgroundColor: "rgba(255,0,0,0.10)",
 
-              fill: true,
+                borderWidth: 3,
 
-              tension: 0.3
+                pointRadius: 4,
+
+                tension: 0.3,
+
+                fill: false,
+
+                yAxisID: "yTemperatura"
             },
 
             {
-              label: "Umidade (%)",
+                label: "Umidade (%)",
 
-              data: [],
+                data: [],
 
-              borderColor: "blue",
+                borderColor: "blue",
 
-              backgroundColor:
-                "rgba(0,0,255,0.15)",
+                backgroundColor: "rgba(0,0,255,0.10)",
 
-              fill: true,
+                borderWidth: 3,
 
-              tension: 0.3
+                pointRadius: 4,
+
+                tension: 0.3,
+
+                fill: false,
+
+                yAxisID: "yUmidade"
             }
 
-          ]
+        ]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        interaction: {
+            mode: "index",
+            intersect: false
+        },
+
+        plugins: {
+
+            legend: {
+                display: true
+            },
+
+            title: {
+                display: true,
+                text: "Temperatura e Umidade ao longo do tempo"
+            }
 
         },
 
-        options: {
-
-          responsive: true,
-
-          plugins: {
-
-            legend: {
-              display: true
-            }
-
-          },
-
-          scales: {
+        scales: {
 
             x: {
 
-              title: {
-                display: true,
-                text: "Tempo"
-              }
+                title: {
+                    display: true,
+                    text: "Horário das medições"
+                }
 
             },
 
-            y: {
+            yTemperatura: {
 
-              title: {
-                display: true,
-                text: "Valor"
-              }
+                type: "linear",
+
+                position: "left",
+
+                title: {
+                    display: true,
+                    text: "Temperatura (°C)"
+                }
+
+            },
+
+            yUmidade: {
+
+                type: "linear",
+
+                position: "right",
+
+                min: 0,
+
+                max: 100,
+
+                title: {
+                    display: true,
+                    text: "Umidade (%)"
+                },
+
+                grid: {
+                    drawOnChartArea: false
+                }
 
             }
 
-          }
-
         }
 
-      });
+    }
+
+});
 
 
       // =====================================================
@@ -551,15 +963,31 @@
           // =================================================
 
           const temperatura =
-            dados.main.temp;
+    dados.main.temp;
 
+const umidade =
+    dados.main.humidity;
 
-          const umidade =
-            dados.main.humidity;
+const sensacao =
+    dados.main.feels_like;
 
+const vento =
+    dados.wind.speed;
 
-          const nomeCidade =
-            dados.name;
+const pressao =
+    dados.main.pressure;
+
+const tempMax =
+    dados.main.temp_max;
+
+const tempMin =
+    dados.main.temp_min;
+
+const condicao =
+    dados.weather[0].description;
+
+const nomeCidade =
+    dados.name;
 
 
           // =================================================
@@ -577,6 +1005,35 @@
             .textContent =
             `${umidade} %`;
 
+          document
+            .getElementById("sensacao")
+            .textContent =
+            `${sensacao} °C`;
+
+          document
+            .getElementById("vento")
+            .textContent =
+            `${(vento * 3.6).toFixed(1)} km/h`;
+
+          document
+            .getElementById("pressao")
+            .textContent =
+            `${pressao} hPa`;
+
+          document
+            .getElementById("tempMax")
+            .textContent =
+            `${tempMax} °C`;
+
+          document
+            .getElementById("tempMin")
+            .textContent =
+            `${tempMin} °C`;
+
+          document
+            .getElementById("condicao")
+            .textContent =
+            condicao;
 
           document
             .getElementById("cidadeAtual")
